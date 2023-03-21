@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SABJAN</title>
+	<style>
+		body {
+			background-image: url('https://images.unsplash.com/photo-1507144003717-758f64c5e2a2?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=michael-chaffin-791042-unsplash.jpg');
+			background-size: cover;
+			background-position: center;
+			font-family: Arial, sans-serif;
+		}
+		nav {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 20px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			z-index: 1;
+		}
+		nav a {
+			color: white;
+			text-decoration: none;
+			margin: 0 10px;
+			font-size: 20px;
+			transition: all 0.3s ease-in-out;
+		}
+		nav a:hover {
+			transform: scale(1.1);
+		}
+		#logo {
+			font-size: 30px;
+			font-weight: bold;
+		}
+		#options {
+			display: flex;
+			align-items: center;
+		}
+		#options a {
+			margin: 0 10px;
+			font-size: 18px;
+			font-weight: bold;
+			transition: all 0.3s ease-in-out;
+		}
+		#options a:hover {
+			transform: scale(1.1);
+		}
+		#signin {
+			background-color: white;
+			color: black;
+			padding: 10px 20px;
+			border-radius: 20px;
+			font-weight: bold;
+			transition: all 0.3s ease-in-out;
+		}
+		#signin:hover {
+			background-color: black;
+			color: white;
+			cursor: pointer;
+			transform: scale(1.1);
+		}
+		#search {
+			background-color: white;
+			color: black;
+			padding: 10px;
+			border-radius: 20px;
+			font-weight: bold;
+			transition: all 0.3s ease-in-out;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 1;
+			width: 50%;
+			max-width: 500px;
+			display: flex;
+			align-items: center;
+		}
+		#search input[type="text"] {
+			border: none;
+			flex: 1;
+			padding: 10px;
+			font-size: 18px;
+			font-weight: bold;
+			background-color: transparent;
+		}
+		#search button {
+			background-color: black;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 20px;
+			font-weight: bold;
+			margin-left: 10px;
+			cursor: pointer;
+		}
+		#search button:hover {
+			background-color: white;
+			color: black;
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<div id="logo">SABJAN</div>
+		<div id="options">
+			<a href="#">Home</a>
+			<a href="#">Others</a>
+			<div id="signin">Sign in
