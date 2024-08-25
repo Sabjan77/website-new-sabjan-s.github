@@ -75,10 +75,11 @@
 <body>
     <div class="search-container">
         <h1>Search the Web</h1>
-        <form id="search-form" class="search-box" action="https://www.google.com/search" method="get">
-            <input type="text" name="q" placeholder="Type your search query here..." required>
+        <form id="search-form" class="search-box" onsubmit="performSearch(event)">
+            <input type="text" id="search-query" placeholder="Type your search query here..." required>
             <input type="submit" value="Search">
         </form>
+        <div id="search-results" style="margin-top: 20px;"></div>
     </div>
 
     <div id="language-popup" class="popup">
@@ -87,29 +88,67 @@
         <button onclick="setLanguage('ne')">Nepali</button>
     </div>
 
-    <div class="events-container">
+    <div class="events-container" id="events-container">
         <h2>Latest Events</h2>
-        <div class="event">
-            <img src="event1.jpg" alt="Event 1">
-            <p><strong>Event Title 1</strong> - Short description about the event.</p>
-        </div>
-        <div class="event">
-            <img src="event2.jpg" alt="Event 2">
-            <p><strong>Event Title 2</strong> - Short description about the event.</p>
-        </div>
-        <!-- Add more events as needed -->
+        <!-- Event elements will be dynamically added here -->
     </div>
 
     <script>
         // Show language popup
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('language-popup').style.display = 'block';
+            fetchEvents();
         });
 
         function setLanguage(lang) {
             // Implement language setting here
             alert(`Language set to ${lang}`);
             document.getElementById('language-popup').style.display = 'none';
+        }
+
+        function performSearch(event) {
+            event.preventDefault();
+            const query = document.getElementById('search-query').value;
+            fetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json`)
+                .then(response => response.json())
+                .then(data => {
+                    displaySearchResults(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching search results:', error);
+                });
+        }
+
+        function displaySearchResults(data) {
+            const resultsContainer = document.getElementById('search-results');
+            resultsContainer.innerHTML = '<h2>Search Results</h2>';
+            data.RelatedTopics.forEach(result => {
+                if (result.Text) {
+                    const resultElement = document.createElement('div');
+                    resultElement.innerHTML = `<p><strong>${result.Text}</strong> - ${result.FirstURL}</p>`;
+                    resultsContainer.appendChild(resultElement);
+                }
+            });
+        }
+
+        function fetchEvents() {
+            fetch('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=YOUR_API_KEY')
+                .then(response => response.json())
+                .then(data => {
+                    const eventsContainer = document.getElementById('events-container');
+                    data.results.forEach(event => {
+                        const eventElement = document.createElement('div');
+                        eventElement.classList.add('event');
+                        eventElement.innerHTML = `
+                            <img src="${event.multimedia[0] ? event.multimedia[0].url : 'placeholder.jpg'}" alt="${event.title}">
+                            <p><strong>${event.title}</strong> - ${event.abstract}</p>
+                        `;
+                        eventsContainer.appendChild(eventElement);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching events:', error);
+                });
         }
     </script>
 </body>
