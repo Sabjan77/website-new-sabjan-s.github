@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Search and Latest Events</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .search-container {
+            text-align: center;
+            padding: 20px;
+        }
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .search-box input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .search-box input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .search-box input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            z-index: 1000;
+        }
+        .popup button {
+            margin-top: 10px;
+        }
+        .events-container {
+            text-align: center;
+            margin: 20px;
+        }
+        .event {
+            margin-bottom: 20px;
+        }
+        .event img {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <h1>Search the Web</h1>
+        <form id="search-form" class="search-box" action="https://www.google.com/search" method="get">
+            <input type="text" name="q" placeholder="Type your search query here..." required>
+            <input type="submit" value="Search">
+        </form>
+    </div>
+
+    <div id="language-popup" class="popup">
+        <h2>Select Language</h2>
+        <button onclick="setLanguage('en')">English</button>
+        <button onclick="setLanguage('ne')">Nepali</button>
+    </div>
+
+    <div class="events-container">
+        <h2>Latest Events</h2>
+        <div class="event">
+            <img src="event1.jpg" alt="Event 1">
+            <p><strong>Event Title 1</strong> - Short description about the event.</p>
+        </div>
+        <div class="event">
+            <img src="event2.jpg" alt="Event 2">
+            <p><strong>Event Title 2</strong> - Short description about the event.</p>
+        </div>
+        <!-- Add more events as needed -->
+    </div>
+
+    <script>
+        // Show language popup
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('language-popup').style.display = 'block';
+        });
+
+        function setLanguage(lang) {
+            // Implement language setting here
+            alert(`Language set to ${lang}`);
+            document.getElementById('language-popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
