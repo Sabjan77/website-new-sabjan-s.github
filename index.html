@@ -3,153 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Search and Latest Events</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .search-container {
-            text-align: center;
-            padding: 20px;
-        }
-        .search-box {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .search-box input[type="text"] {
-            width: 80%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        .search-box input[type="submit"] {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            background-color: #007BFF;
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .search-box input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-        .popup {
-            display: none;
-            position: fixed;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 20px;
-            z-index: 1000;
-        }
-        .popup button {
-            margin-top: 10px;
-        }
-        .events-container {
-            text-align: center;
-            margin: 20px;
-        }
-        .event {
-            margin-bottom: 20px;
-        }
-        .event img {
-            max-width: 100%;
-            border-radius: 4px;
-        }
-    </style>
+    <title>Your Name - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
-    <div class="search-container">
-        <h1>Search the Web</h1>
-        <form id="search-form" class="search-box" onsubmit="performSearch(event)">
-            <input type="text" id="search-query" placeholder="Type your search query here..." required>
-            <input type="submit" value="Search">
-        </form>
-        <div id="search-results" style="margin-top: 20px;"></div>
-    </div>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div id="language-popup" class="popup">
-        <h2>Select Language</h2>
-        <button onclick="setLanguage('en')">English</button>
-        <button onclick="setLanguage('ne')">Nepali</button>
-    </div>
+    <section id="home">
+        <h1>Hello, I'm Your SABJAN</h1>
+        <p>Aspiring Mechanical Engineer</p>
+    </section>
 
-    <div class="events-container" id="events-container">
-        <h2>Latest Events</h2>
-        <!-- Event elements will be dynamically added here -->
-    </div>
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I am a Mechanical engineering student currently studying at IOE Purwanchal Engineering Campus, Dharan. I serve as the secretary of the Society of Mechanical Engineering Students (SOMES). I have gained knowledge in AutoCAD, SolidWorks, and programming languages like C.</p>
+    </section>
 
-    <script>
-        // Show language popup
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('language-popup').style.display = 'block';
-            fetchEvents();
-        });
+    <section id="projects">
+        <h2>Projects</h2>
+        <!-- Add your projects here -->
+    </section>
 
-        function setLanguage(lang) {
-            // Implement language setting here
-            alert(`Language set to ${lang}`);
-            document.getElementById('language-popup').style.display = 'none';
-        }
+    <section id="contact">
+        <h2>contact</h2>
+        <p>Email: sabjan77dhakall@gmail.com</p>
+        <!-- Add more contact details if necessary -->
+    </section>
 
-        function performSearch(event) {
-            event.preventDefault();
-            const query = document.getElementById('search-query').value;
-            fetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json`)
-                .then(response => response.json())
-                .then(data => {
-                    displaySearchResults(data);
-                })
-                .catch(error => {
-                    console.error('Error fetching search results:', error);
-                });
-        }
-
-        function displaySearchResults(data) {
-            const resultsContainer = document.getElementById('search-results');
-            resultsContainer.innerHTML = '<h2>Search Results</h2>';
-            data.RelatedTopics.forEach(result => {
-                if (result.Text) {
-                    const resultElement = document.createElement('div');
-                    resultElement.innerHTML = `<p><strong>${result.Text}</strong> - ${result.FirstURL}</p>`;
-                    resultsContainer.appendChild(resultElement);
-                }
-            });
-        }
-
-        function fetchEvents() {
-            fetch('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=YOUR_API_KEY')
-                .then(response => response.json())
-                .then(data => {
-                    const eventsContainer = document.getElementById('events-container');
-                    data.results.forEach(event => {
-                        const eventElement = document.createElement('div');
-                        eventElement.classList.add('event');
-                        eventElement.innerHTML = `
-                            <img src="${event.multimedia[0] ? event.multimedia[0].url : 'placeholder.jpg'}" alt="${event.title}">
-                            <p><strong>${event.title}</strong> - ${event.abstract}</p>
-                        `;
-                        eventsContainer.appendChild(eventElement);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error fetching events:', error);
-                });
-        }
-    </script>
+    <footer>
+        <p>&copy; 2025 Your Name. All rights reserved.</p>
+    </footer>
 </body>
 </html>
